@@ -87,7 +87,7 @@ function buy(id) {
             
         }
      }
-
+     calculateTotal() 
      console.log("Add Products Cart", cartList);
 }
 
@@ -101,7 +101,14 @@ console.log("Clean Cart", cartList);
 
 // Exercise 3
 function calculateTotal() {
-    // Calculate total price of the cart using the "cartList" array
+   // 1. Loop for to the array cartList to get the total price of the cart
+   
+   let total = 0;
+   for (let i = 0; i < cartList.length; i++) {  // for itera a través del array cartList y agrega el precio de cada artículo a la variable total.
+        total += cartList[i].price;
+   }
+   console.log("Total Cart", total);
+
 }
 
 // Exercise 4
