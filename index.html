@@ -26,6 +26,13 @@
 						 <span class="navbar-toggler-icon"></span>
 					 </button>
 					 <ul class="navbar-nav me-3 me-lg-0 d-flex flex-row align-items-center">
+
+						<li class="dropdown search-dropdown nav-item py-lg-3 me-lg-2">						 
+							<a href="javascript:void(0)" class="btn btn-outline-primary flex-center mr-56" type="button"  onclick="generateCart()">
+							 <i class="fas fa-shopping-cart me-1"></i> Generate Cart
+							</a>
+						</li>
+
 						 <li class="dropdown search-dropdown nav-item py-lg-3">						 
 							 <a href="javascript:void(0)" class="btn btn-outline-dark flex-center" type="button" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="open_modal()" data-bs-auto-close="outside">
 								<i class="fas fa-shopping-cart me-1"></i> Cart <span class="badge bg-dark text-white ms-1 rounded-pill" id="count_product">0</span>
@@ -274,6 +281,8 @@
 
         <!-- Core theme JS-->
         <script src="js/shop.js"></script>
-		<script src="js/checkout.js"></script>
+				<script src="js/products.js"></script>
+		    <script src="js/checkout.js"></script>
+
     </body>
 </html>
