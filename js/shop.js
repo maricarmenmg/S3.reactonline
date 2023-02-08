@@ -1,5 +1,3 @@
-
-
 // Array with products (objects) added directly with push(). Products in this array are repeated.
 
 let cartList = [];
@@ -16,75 +14,95 @@ function buy(id) {
 
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
-    
-    for (i = 0; i < products.length; i++){
-        if (products[i].id == id){
+
+    for (i = 0; i < products.length; i++) {
+        if (products[i].id == id) {
             cartList.push(products[i]);
-            
+
         }
-     }
-     calculateTotal() 
-     //console.log("Add Products Cart", cartList);
+    }
+    calculateTotal()
+    //console.log("Add Products Cart", cartList);
 }
 
 // Exercise 2
 function cleanCart() {
-   // 1. Vaciamos el array cartList
-cartList = [];
-console.log("Clean Cart", cartList);
 
+    cartList = []; // 1. Vaciamos el array cartList
+    console.log("Clean Cart", cartList);
 }
 
 // Exercise 3
 function calculateTotal() {
-   // 1. Loop for to the array cartList to get the total price of the cart
-   
-   let total = 0;
-   for (let i = 0; i < cartList.length; i++) {  // for itera a través del array cartList y agrega el precio de cada artículo a la variable total.
+
+    // 1. Loop for to the array cartList to get the total price of the cart
+
+    let total = 0;
+    for (let i = 0; i < cartList.length; i++) { // for itera a través del array cartList y agrega el precio de cada artículo a la variable total.
         total += cartList[i].price;
-   }
-   console.log("Total Cart", total);
+    }
+    console.log("Total Cart", total);
 
 }
 
 // Exercise 4
-function generateCart() {
 
+function generateCart() {
+    
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
    //  ℹ️ findIndex: Devuelve el índice del primer elemento de la matriz donde el predicado es verdadero y -1 en caso contrario.
 
-
-let cart = []; // Array cart
-
- for(let i = 0; i < cartList.length; i++){  // Iteramos en el array cartList.
-    let found = cart.findIndex(producto => producto.id == cartList[i].id); // Buscamos el producto en el array cart.
-       // Si el producto no está en el array cart, lo agregamos. Si no existe, añadimos un nuevo producto al array cart / propiedad "quantity".
-    if(found == -1){
-        cart.push({...cartList[i], quantity: 1, subtotal: cartList[i].price});
+   for (let i = 0; i < cartList.length; i++) {  // Recorremos con for cartList.
+    const item = cartList[i]; // Iteramos tomamos el elemento de cartlist y la guardamos en item .
+    const existingIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+  
+    if (existingIndex === -1) {  // Si el producto no está en el array cart, lo agregamos. Si no existe, añadimos un nuevo producto al array cart.
+      cart.push({...item, quantity: 1, subtotal: item.price, subtotalWithDiscount: 0,});
     } else {
-        cart[found].quantity++; // Si ya existe aumenta la cantidad del producto.
-        cart[found].subtotal += cartList[i].price; // Agrega el precio al subtoatal.
+      cart[existingIndex].quantity++; // Si ya existe aumenta la cantidad del producto.
+      cart[existingIndex].subtotal += item.price; // Agrega el precio al subtotal.
     }
-
+  }
+     
+  applyPromotionsCart();
+     console.log("Generate Cart", cart);
 }
-       console.log("Generate Cart", cart);
-}
-
-
-
-
 
 // Exercise 5
 function applyPromotionsCart() {
+
     // Apply promotions to each item in the array "cart"
+    // Si el usuario compra 3 o más botellas de aceite, el precio del producto desciende 10 euros.
+    // Cuando se compran 10 o más productos para hacer pastel, su precio se rebaja a 2/3.
+
+for (let i = 0; i < cart.length; i++) {
+
+    if (cart[i].id === 1 && cart[i].quantity >= 3) {
+        cart[i].subtotalWithDiscount = (cart[i].subtotal - 10).toFixed(2);
+
+        console.log("Subtotal con descuento", cart[i].name, cart[i].subtotalWithDiscount);
+        
+        
+    } else if (cart[i].id === 3 && cart[i].quantity >= 10) {
+        cart[i].subtotalWithDiscount = ((cart[i].subtotal / 3) * 2).toFixed(2);
+
+        console.log("Subtotal con descuento", cart[i].name, cart[i].subtotalWithDiscount);
+
+    } else {
+        cart[i].subtotalWithDiscount = cart[i].subtotal
+        
+    }
 }
+    console.log("Promotions Cart",cart);
+
+}
+
 
 // Exercise 6
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
 }
-
 
 
 // ** Nivell II **
@@ -107,7 +125,7 @@ function removeFromCart(id) {
 
 }
 
-function open_modal(){
-	console.log("Open Modal");
-	printCart();
+function open_modal() {
+    console.log("Open Modal");
+    printCart();
 }
