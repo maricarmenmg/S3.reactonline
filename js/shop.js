@@ -81,13 +81,13 @@ for (let i = 0; i < cart.length; i++) {
     if (cart[i].id === 1 && cart[i].quantity >= 3) {
         cart[i].subtotalWithDiscount = (cart[i].subtotal - 10).toFixed(2);
 
-        console.log("Subtotal con descuento", cart[i].name, cart[i].subtotalWithDiscount);
+        console.log("Subtotal con descuento:", cart[i].name, cart[i].subtotalWithDiscount);
         
         
     } else if (cart[i].id === 3 && cart[i].quantity >= 10) {
         cart[i].subtotalWithDiscount = ((cart[i].subtotal / 3) * 2).toFixed(2);
 
-        console.log("Subtotal con descuento", cart[i].name, cart[i].subtotalWithDiscount);
+        console.log("Subtotal con descuento:", cart[i].name, cart[i].subtotalWithDiscount);
 
     } else {
         cart[i].subtotalWithDiscount = cart[i].subtotal
