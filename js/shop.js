@@ -3,13 +3,11 @@
 let cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
-
 let cart = [];
 let total = 0;
 
 
 // Exercise 1
-
 function buy(id) {
 
     // 1. Loop for to the array products to get the item to add to cart
@@ -27,14 +25,14 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
-
-    cartList = []; // 1. Vaciamos el array cartList
+    cart = [];
+    //cartList = []; // 1. Vaciamos el array cartList
+    printCart();
     console.log("Clean Cart", cartList);
 }
 
 // Exercise 3
 function calculateTotal() {
-
     // 1. Loop for to the array cartList to get the total price of the cart
 
     let total = 0;
@@ -46,7 +44,6 @@ function calculateTotal() {
 }
 
 // Exercise 4
-
 function generateCart() {
     
     // Using the "cartlist" array that contains all the items in the shopping cart, 
@@ -64,14 +61,14 @@ function generateCart() {
       cart[existingIndex].subtotal += item.price; // Agrega el precio al subtotal.
     }
   }
-     
-  applyPromotionsCart();
-     console.log("Generate Cart", cart);
+
+     printCart();
+     applyPromotionsCart();
+     console.log("Generated Cart", cart);
 }
 
 // Exercise 5
 function applyPromotionsCart() {
-
     // Apply promotions to each item in the array "cart"
     // Si el usuario compra 3 o más botellas de aceite, el precio del producto desciende 10 euros.
     // Cuando se compran 10 o más productos para hacer pastel, su precio se rebaja a 2/3.
@@ -82,7 +79,6 @@ for (let i = 0; i < cart.length; i++) {
         cart[i].subtotalWithDiscount = (cart[i].subtotal - 10).toFixed(2);
 
         console.log("Subtotal con descuento:", cart[i].name, cart[i].subtotalWithDiscount);
-        
         
     } else if (cart[i].id === 3 && cart[i].quantity >= 10) {
         cart[i].subtotalWithDiscount = ((cart[i].subtotal / 3) * 2).toFixed(2);
@@ -98,10 +94,32 @@ for (let i = 0; i < cart.length; i++) {
 
 }
 
-
 // Exercise 6
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+
+    document.getElementById("cart_list").innerHTML = "";
+   
+    let totalPrice = 0;
+    let countProduct = 0;
+
+    for (let i = 0; i < cart.length; i++) { // bucle iteramos a través de los items del carrito.
+
+        // Agregamos contenido existente en el elemento  ID cart list
+        document.getElementById("cart_list").innerHTML += `
+        <tr>
+            <td>${cart[i].name}</td>
+            <td>${cart[i].price}</td>
+            <td>${cart[i].quantity}</td>
+            <td>${cart[i].subtotalWithDiscount}</td>
+        </tr>
+        `
+        totalPrice += cart[i].subtotalWithDiscount;
+        countProduct += cart[i].quantity;
+}
+       document.getElementById("total_price").innerHTML = totalPrice.toFixed(2); // Redondear el total price
+       document.getElementById("count_product").innerHTML = countProduct; // Redondear el total price
+
 }
 
 
