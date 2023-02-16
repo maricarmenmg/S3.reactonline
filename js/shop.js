@@ -101,7 +101,7 @@ function printCart() {
     document.getElementById("cart_list").innerHTML = "";
    
     let totalPrice = 0;
-    let countProduct = 0;
+    //let countProduct = 0;
 
     for (let i = 0; i < cart.length; i++) { // bucle iteramos a través de los items del carrito.
 
@@ -115,10 +115,10 @@ function printCart() {
         </tr>
         `
         totalPrice += cart[i].subtotalWithDiscount;
-        countProduct += cart[i].quantity;
+        //countProduct += cart[i].quantity;
 }
        document.getElementById("total_price").innerHTML = totalPrice.toFixed(2); // Redondear el total price
-       document.getElementById("count_product").innerHTML = countProduct; // Redondear el total price
+       //document.getElementById("count_product").innerHTML = countProduct; // Redondear el total price
 
 }
 
@@ -130,6 +130,16 @@ function addToCart(id) {
     // Refactor previous code in order to simplify it 
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array or update its quantity in case it has been added previously.
+
+    const countProduct = [];
+
+    for (let i = 0; i < cart.length; i++) { // bucle iteramos a través de los items del carrito.
+        countProduct.push(`${cart[i].name} - $${cart[i].price}`);
+    }
+    
+    console.log(countProduct);
+
+
 }
 
 
